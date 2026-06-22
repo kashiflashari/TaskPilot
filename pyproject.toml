@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "taskpilot"
+version = "0.1.0"
+description = "Agentic workflow automation bot (tool-calling + MCP + human approval)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Kashif Lashari" }]
+dependencies = [
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.40", "openai-agents>=0.0.1"]
+mcp = ["mcp>=1.0"]
+redis = ["redis>=5.0"]
+api = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
+dev = [
+    "pytest>=8",
+    "ruff>=0.5",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+]
+
+[project.scripts]
+taskpilot = "taskpilot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
